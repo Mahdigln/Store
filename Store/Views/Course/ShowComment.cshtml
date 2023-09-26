@@ -1,0 +1,80 @@
+﻿@using Core.Convertors
+@model  Tuple<List<DataLayer.Entities.Course.CourseComment>,int>
+
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model.Item1)
+{
+    <div class="comment-row Rright">
+        <img src="/UserAvatar/@item.User.UserAvatar" style="max-height: 90px">
+        <div class="left-col">
+            <h3> @item.User.UserName </h3>
+            <span>@item.CreateDate.ToShamsi()</span>
+            <p>
+                @item.Comment
+            </p>
+        </div>
+    </div>
+}
+
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        
+        @for (int i = 1; i <= Model.Item2; i++)
+        {
+            <li class="page-item"><a class="page-link" onclick="pageComment(@i)" >@i</a></li>
+           
+        }
+       
+    </ul>
+</nav>
+
+
+<style>
+    >Rright {
+        text-align: right
+    }
+
+    .comment-list .comment-row{
+        width: 100%;
+        padding: 15px 90px 15px 15px;
+        position: relative;
+        border-bottom: 1px solid #ebebeb
+    }
+    .comment-list .comment-row img{
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        position: absolute;
+        right: 0;
+        border:2px solid #ebebeb;
+        top: 15px
+    }
+    .comment-list .comment-row .left-col{
+        width: 100%;
+        position: relative;
+    }
+    .comment-list .comment-row .left-col h3{
+        display: block;
+        font-size: 14px;
+        line-height: 22px;
+        margin-bottom: 5px;
+        color: #333
+    }
+    .comment-list .comment-row .left-col span{
+        display: block;
+        font-size: 13px;
+        line-height: 22px;
+        margin-bottom: 5px;
+        color: #ccc
+    }
+    .comment-list .comment-row .left-col p{
+        display: block;
+        font-size: 13px;
+        line-height: 22px;
+        text-align: justify;
+        margin-bottom: 0
+    }
+</style>

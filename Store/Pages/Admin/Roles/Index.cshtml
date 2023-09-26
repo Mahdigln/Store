@@ -1,0 +1,56 @@
+﻿@page
+@model Store.Pages.Admin.Roles.IndexModel
+@{
+    ViewData["Title"] = "لیست نقش ها";
+}
+
+<div class="main-content">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header" style="text-align: right">لیست کاربران سایت</div>
+            <div class="card-body card-block">
+
+               
+                <div class="row col-md-12" dir="rtl">
+                        
+                    <a asp-page="CreateRole" class="btn btn-outline-success">افزودن نقش جدید</a>
+                        
+                </div>
+                <br/>
+
+                <div class="col-lg-12">
+                    <div class="table-responsive table--no-card m-b-30">
+                        <table class="table table-borderless table-striped table-earning" style="text-align: right">
+                            <thead>
+                                <tr>
+                                    <th>دستورات</th>
+                                    <th>عنوان نقش</th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                            @foreach (var role in Model.RoleList)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="/Admin/Roles/EditRole/@role.RoleId" class="btn btn-warning btn-sm">
+                                            ویرایش
+                                        </a>
+                                        <a href="/Admin/Roles/DeleteRole/@role.RoleId" class="btn btn-danger btn-sm">
+                                            حذف
+                                        </a>
+                                    </td>
+                                   <td>@role.RoleTitle</td>
+                                </tr>
+                            }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

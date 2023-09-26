@@ -1,0 +1,25 @@
+﻿@page "{id}"
+@model Store.Pages.Admin.Roles.DeleteRoleModel
+@{
+    ViewData["Title"] = "حذف نقش";
+}
+
+
+
+<form method="post">
+    <input type="hidden" asp-for="Role.RoleId"/>
+    <input type="hidden" asp-for="Role.RoleTitle"/>
+    <div class="main-content">
+        <div class="alert alert-danger" role="alert" dir="rtl" style="text-align: center">
+            <p>آیا از حذف نقش
+                <strong class="alert-link">
+                    @Model.Role.RoleTitle
+                </strong>
+                مطمئن هستید؟
+            </p>
+            <button type="submit" class="btn btn-outline-danger">حذف کن</button>
+            <a asp-page="Index" class="btn btn-outline-primary"> انصراف</a>
+        </div>
+    </div>
+
+</form>

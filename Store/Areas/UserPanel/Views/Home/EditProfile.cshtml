@@ -1,0 +1,54 @@
+﻿@model Core.DTOs.EditProfileViewModel
+@{
+    ViewData["Title"] = "ویرایش حساب کاربری";
+}
+
+    <div class="col-md-9">
+                                <div class="" style="text-align: right;padding: initial;padding-right: 350px;padding-top: 150px; padding-bottom: 100px;position: relative;right: 134px;">
+                                    <div class="card-header">ویرایش حساب کاربری</div>
+                                    <div class="card-body card-block">
+                                        <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+                                            <input type="hidden" asp-for="AvatarName"/>
+                                            
+                                            <div class="wrap-input100 validate-input" >
+                                                <input asp-for="UserName" class="input100" type="text" name="UserName" placeholder="نام کاربری">
+                                                <span class="focus-input100"></span>
+                                                <span class="symbol-input100">
+                                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+
+                                            <div class="wrap-input100 validate-input">
+                                                <input asp-for="Email" class="input100" type="email" name="email" placeholder="ایمیل">
+                                                <span class="focus-input100"></span>
+                                                <span class="symbol-input100">
+                                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+
+                                            <div>
+                                                <p class="help-block">
+                                                    آواتار
+                                                </p>
+                                                <input type="file" asp-for="UserAvatar"/>
+                                                <p>لطفا فقط تصویر انتخاب کنید</p>
+                                                <img class="thumbnail" src="/UserAvatar/@Model.AvatarName" style="max-width: 150px"/>
+                                            </div>
+
+                                            <div class="container-login100-form-btn">
+                                                <button class="login100-form-btn">
+                                                    ویرایش اطلاعات
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+<partial name="_Sidebar"/>
+
+
+
+
+
+

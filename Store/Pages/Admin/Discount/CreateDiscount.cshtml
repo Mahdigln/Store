@@ -1,0 +1,105 @@
+﻿@page "{handler?}"
+@model Store.Pages.Admin.Discount.CreateDiscountModel
+@{
+    ViewData["Title"] = "افزودن کد تخفیف";
+}
+
+
+<div class="main-content">
+    
+    <form method="post" enctype="multipart/form-data" dir="rtl" style="text-align: right">
+        <h2 style="padding: initial;padding-right: 50px;padding-bottom: 15px;">افزودن کد تخفیف جدید</h2 >
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>اطلاعات کد تخفیف</strong>
+                            </div>
+                            <div class="card-body card-block">
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>کد تخفیف</strong></label>
+                                    <input type="text" placeholder="کد تخفیف را وارد کنید" asp-for="Discount.DiscountCode" class="form-control">
+                                    <div id="alertCode" class="alert alert-danger" style="display: none">
+                                        <p class="text-muted"> کد وارد شده تکراری میباشد</p>
+                                    </div>
+
+                                </div>
+
+                               
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>درصد کد تخفیف</strong></label>
+                                    <input type="text" placeholder="درصد کد تخفیف  وارد کنید" asp-for="Discount.DiscountPercent" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>تعداد</strong></label>
+                                    <input type="text" placeholder="تعداد  وارد کنید" asp-for="Discount.UsableCount" class="form-control">
+                                </div>
+                                
+                                
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>تاریخ  شروع</strong></label>
+                                    <input  id="stDate" name="stDate">
+                                </div>
+                                
+
+                                <div>
+                                    <label class=" form-control-label"><strong>تاریخ  پایان</strong></label>
+                                    <input  id="edDate" name="edDate">
+                                </div>
+
+                               
+                                <div>
+                                    <button type="submit" class="btn btn-lg btn-info btn-block">
+                                        <span>افزودن کد تخفیف</span>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@*kendo is running in http  not https
+*@
+@section Scripts
+{
+    <script>
+        $("#Discount_DiscountCode").blur(function() {
+            $.ajax({
+                type: "get",
+                url: "/Admin/Discount/CreateDiscount/CheckCode?code=" + $("#Discount_DiscountCode").val()
+            }).done(function(res) {
+                if (res==='True') {
+                    $("#alertCode").show();
+                }
+                else {
+                    $("#alertCode").hide();
+                }
+            });
+        });
+    </script>
+
+
+    @**************************************@
+
+    
+    <link href="http://cdn.kendostatic.com/2013.2.918/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2013.2.918/styles/kendo.default.min.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="/js/kendo.all.min.js"></script>
+    
+    <script>
+        // create DatePicker from input HTML element
+        $("#stDate").kendoDatePicker();
+        $("#edDate").kendoDatePicker();
+    </script>
+}

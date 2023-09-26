@@ -1,0 +1,112 @@
+﻿@page "{id}"
+@using DataLayer.Entities.Permissions
+@model Store.Pages.Admin.Roles.EditRoleModel
+@{
+    ViewData["Title"] = "ویرایش نقش";
+    List<Permission> permissions = ViewData["Permissions"] as List<Permission>;
+}
+
+<div class="main-content">
+    
+    <form method="post" enctype="multipart/form-data" dir="rtl" style="text-align: right">
+        <h2 style="padding: initial;padding-right: 50px;padding-bottom: 15px;">ویرایش نقش</h2 >
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>نقش</strong>
+                            </div>
+                            <div class="card-body card-block">
+                                <input type="hidden" asp-for="EditRole.RoleId"/>
+                                <input type="hidden" asp-for="EditRole.IsDeleted"/>
+
+
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>عنوان نقش</strong></label>
+                                    <input type="text" asp-for="EditRole.RoleTitle" class="form-control">
+                                </div>
+
+                                <button type="submit" class="btn btn-lg btn-info btn-block">
+                                    <span>ذخیره اطلاعات</span>
+                                </button>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>دسترسی های نقش</strong>
+                            </div>
+                            <div class="card-body">
+                                @{
+                                    List<int> SelectedPermissions = ViewData["SelectedPermissions"] as List<int>;
+                                }
+                                <ul>
+                                    @foreach (var permission in permissions.Where(p => p.ParentID == null))
+                                    {
+                                        <li>
+                                            @*<input type="checkbox" name="SelectedPermission" value="@permission.PermissionId" /> @permission.PermissionTitle*@
+                                            <br/>
+                                            @permission.PermissionTitle
+                                            <label class="switch switch-3d switch-info mr-3">
+                                                <input type="checkbox" class="switch-input" name="SelectedPermission" @((SelectedPermissions.Any(p=>p==permission.PermissionId)?"checked":"")) value="@permission.PermissionId">
+                                                <span class="switch-label"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+
+                                            @if (permissions.Any(p => p.ParentID == permission.ParentID))
+                                            {
+                                                <ul>
+                                                    @foreach (var sub in permissions.Where(p => p.ParentID == permission.PermissionId))
+                                                    {
+                                                        <li>
+                                                            @* <input type="checkbox" name="SelectedPermission" value="@sub.PermissionId" /> @sub.PermissionTitle*@
+                                                            <br/>
+                                                            @sub.PermissionTitle
+                                                            <label class="switch switch-3d switch-info mr-3">
+                                                                <input type="checkbox" class="switch-input" @((SelectedPermissions.Any(p=>p==sub.PermissionId)?"checked":"")) name="SelectedPermission" value="@sub.PermissionId">
+                                                                <span class="switch-label"></span>
+                                                                <span class="switch-handle"></span>
+                                                            </label>
+
+                                                            @if (permissions.Any(p => p.ParentID == sub.ParentID))
+                                                            {
+                                                                <ul>
+                                                                    @foreach (var sub2 in permissions.Where(p => p.ParentID == sub.PermissionId))
+                                                                    {
+                                                                        <li>
+                                                                            @* <input type="checkbox" name="SelectedPermission" value="@sub2.PermissionId" /> @sub2.PermissionTitle*@
+                                                                            <br/>
+                                                                            @sub2.PermissionTitle
+                                                                            <label class="switch switch-3d switch-info mr-3">
+                                                                                <input type="checkbox" class="switch-input" name="SelectedPermission" @((SelectedPermissions.Any(p=>p==sub2.PermissionId)?"checked":"")) value="@sub2.PermissionId">
+                                                                                <span class="switch-label"></span>
+                                                                                <span class="switch-handle"></span>
+                                                                            </label>
+                                                                        </li>
+                                                                    }
+                                                                </ul>
+
+                                                            }
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

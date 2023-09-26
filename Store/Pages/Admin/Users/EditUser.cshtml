@@ -1,0 +1,122 @@
+﻿@page "{id}"
+@using DataLayer.Entities.User
+@model Store.Pages.Admin.Users.EditUserModel
+@{
+    ViewData["Title"] = "ویرایش کاربر";
+    List<Role> Roles = ViewData["Roles"] as List<Role>;
+    
+    //List<Role> Roles = ViewData["Roles"] as List<Role> ?? new List<Role>();
+}
+
+<div class="main-content">
+
+    <form method="post" enctype="multipart/form-data" dir="rtl" style="text-align: right">
+        <input type="hidden" asp-for="EditUserViewModel.UserId" />
+        <input type="hidden" asp-for="EditUserViewModel.AvatarName" />
+        <h2 style="padding: initial; padding-right: 50px; padding-bottom: 15px;">ویرایش کاربر</h2>
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>اطلاعات کاربر</strong>
+                            </div>
+                            <div class="card-body card-block">
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>نام کاربری</strong></label>
+                                    <label class=" form-control-label">@Model.EditUserViewModel.UserName</label>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>ایمیل</strong></label>
+                                    <input type="email" placeholder="ایمیل  وارد کنید" asp-for="EditUserViewModel.Email" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>کلمه عبور</strong></label>
+                                    <input type="text" placeholder="در صورت وارد کردن کلمه عبور ، کلمه عبور کاربر تغییر خواهد کرد" asp-for="EditUserViewModel.Password" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>انتخاب نقش کاربر</strong></label>
+                                    @foreach (var item in Roles)
+                                    {
+                                         <br/>
+                                            @item.RoleTitle
+                                            <label class="switch switch-3d switch-info mr-3">
+                                            <input type="checkbox" class="switch-input" name="SelectedRoles" value="@item.RoleId"  @((Model.EditUserViewModel.UserRoles.Any(r => r == item.RoleId) ? "checked" : ""))>
+                                            <span class="switch-label"></span>
+                                            <span class="switch-handle"></span>
+                                            </label>
+                                       
+                                    }
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-lg btn-info btn-block">
+                                        <span>ویرایش اطلاعات</span>
+                                    </button>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>تصویر پروفایل</strong>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="panel-body">
+                                    <img id="imgAvatar" class="thumbnail" src="/UserAvatar/@Model.EditUserViewModel.AvatarName" />
+
+                                    <div class="form-group">
+                                        <br />
+                                        <label><strong>انتخاب تصویر</strong></label>
+                                        <input type="file" asp-for="EditUserViewModel.UserAvatar">
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@*preview image before upload jquery
+*@
+@section Scripts
+{
+@*    <script src="/AdminContent/js/jquery-1.10.2.js"></script>*@
+<script>
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#imgAvatar').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#EditUserViewModel_UserAvatar").change(function() {
+        readURL(this);
+    });
+</script>
+}
+

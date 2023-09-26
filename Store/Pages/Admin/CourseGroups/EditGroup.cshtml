@@ -1,0 +1,47 @@
+﻿@page "{id}"
+@model Store.Pages.Admin.CourseGroups.EditGroupModel
+@{
+    ViewData["Title"] = "ویرایش گروه";
+}
+
+
+<div class="main-content">
+    
+    <form method="post" enctype="multipart/form-data" dir="rtl" style="text-align: right">
+        <h2 style="padding: initial;padding-right: 50px;padding-bottom: 15px;">ویرایش گروه </h2 >
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>گروه جدید </strong>
+                            </div>
+                            <div class="card-body card-block">
+                                <div class="form-group">
+                                </div>
+                                <input type="hidden" asp-for="CourseGroups.ParentId"/>
+                                <input type="hidden" asp-for="CourseGroups.GroupId"/>
+
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>عنوان گروه</strong></label>
+                                    <input type="text" placeholder="عنوان گروه  وارد کنید" asp-for="CourseGroups.GroupTitle"  class="form-control">
+                                </div>
+
+                                <div>
+                                    <button type="submit" class="btn btn-lg btn-info btn-block">
+                                        <span>ذخیره اطلاعات</span>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

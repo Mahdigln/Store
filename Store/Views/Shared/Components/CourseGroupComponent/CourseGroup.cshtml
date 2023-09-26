@@ -1,0 +1,121 @@
+﻿@model IEnumerable<DataLayer.Entities.Course.CourseGroup>
+
+
+<header>
+    <!-- header inner -->
+    <div class="header">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                   
+                    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+                        <b> <a class="navbar-brand" href="/">خانه</a></b>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarScroll">
+                            <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
+
+                                @foreach (var group in Model.Where(g => g.ParentId == null))
+                                {
+                                    <li class="nav-item dropdown">
+                                        <a href="/Course?SelectedGroups=@group.GroupId" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false"> @group.GroupTitle </a>
+                                        @if (Model.Any(g => g.ParentId == group.GroupId))
+                                        {
+                                            <ul class="dropdown-menu">
+                                                @foreach (var sub in Model.Where(g => g.ParentId == group.GroupId))
+                                                {
+                                                    <li class="dropdown"><a href="/Course?SelectedGroups=@sub.GroupId" class="dropdown-item"> @sub.GroupTitle </a></li>
+                                                }
+
+                                            </ul>
+                                        }
+                                    </li>
+                                }
+
+                            </ul>
+
+                               
+                            
+
+                        </div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item d_none login_btn  nav-item">
+                                <a class="nav-link" href="/Logout">خروج</a>
+                            </li>
+                            <li class="nav-item d_none nav-item">
+                                <a class="nav-link" href="/UserPanel">خوش آمدی @User.Identity.Name </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li calass="nav-item d_none login_btn nav-item">
+                                <a class="nav-link" href="/Login">ورود</a>
+                            </li>
+
+                            <li class="nav-item d_none nav-item">
+                                <a class="nav-link" href="/Register">ثبت نام</a>
+                            </li>
+                        }
+                    </nav>
+
+
+
+                </div>
+
+                
+
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</header>
+
+
+
+
+
+
+
+@*<style>
+    /* Add a black background color to the top navigation */
+    .topnav {
+    background-color: #333;
+    overflow: hidden;
+    margin: initial;
+    margin-right: 31px;
+    margin-top: 7px;
+    }
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    }
+
+    /* Change the color of links on hover */
+    .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+    }
+
+    /* Add a color to the active/current link */
+    .topnav a.active {
+    background-color: #03CAFC;
+    color: white;
+    }
+
+    </style>
+*@
+

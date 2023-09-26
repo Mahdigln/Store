@@ -1,0 +1,73 @@
+﻿@using Core.Convertors
+@model IEnumerable<DataLayer.Entities.Order.Order>
+@{
+    ViewData["Title"] = "Index";
+}
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+                <partial name="_SideBar" />
+                <div class="col-2"></div>
+                <div class="col-md-9 col-sm-8  mb-5">
+                    <section class="user-account-content">
+                        <header style="text-align: center"><h1> فاکتورهای شما </h1></header>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>شماره فاکتور</th>
+                                    <th>تاریخ</th>
+                                    <th>جمع</th>
+                                    <th>پرداخت</th>
+                                    <th>دستورات</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.OrderId
+                                        </td>
+                                        <td>
+                                            @item.CreateDate.ToShamsi()
+                                        </td>
+                                        <td>@item.OrderSum</td>
+                                        <td>
+                                            @if (item.IsFinaly)
+                                            {
+                                                <p class="text-success">
+                                                    @*<i class="glyphicon glyphicon-ok"></i>*@
+                                                    پرداخت شده
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                <p class="text-danger">
+                                                  @*  <i class="glyphicon glyphicon-remove"></i>*@
+                                                    پرداخت نشده
+                                                </p>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-info" href="/UserPanel/MyOrders/ShowOrder/@item.OrderId">نمایش</a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

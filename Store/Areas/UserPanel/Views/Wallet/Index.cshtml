@@ -1,0 +1,87 @@
+﻿@using Core.DTOs
+@using Core.Convertors
+@model Core.DTOs.ChargeWalletViewModel
+@{
+    ViewData["Title"] = "کیف پول شما";
+}
+
+<div class="col-md-9">
+    <div class="" style="text-align: right;padding: initial;padding-right: 350px;padding-top: 150px;position: relative;right: 134px;">
+        <div class="card-header">کیف پول شما</div>
+        <div class="card-body card-block">
+            <form asp-action="Index" method="post" enctype="multipart/form-data">
+
+                <div class="wrap-input100 validate-input">
+                    <input asp-for="Amount" class="input100" type="number" name="Amount" placeholder="مبلغ به تومان">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-dollar" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="text-danger" asp-validation-summary="All"></div>
+
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">
+                        شارژ کیف پول
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+        @{
+            List<WalletViewModel> list = ViewBag.ListWallet as List<WalletViewModel>;
+        }
+        <div>
+
+            <div class="table-responsive m-b-40">
+                <table class="table table-borderless table-data3">
+
+                    <tr>
+                        <th>مبلغ</th>
+                        <th>تاریخ</th>
+                        <th>نوع تراکنش</th>
+                        <th>شرح </th>
+
+                    </tr>
+                    @foreach (var item in list)
+                    {
+                        <tr>
+                            <td>@item.Amount.ToString("#,0 تومان")</td>
+                            <td>@item.DateTime.ToShamsi()</td>
+                            <td>
+                                @if (item.Type == 1)
+                                {
+                                    <p class="text-success">واریز حساب</p>
+                                }
+                                else
+                                {
+                                    <p class="text-danger">برداشت از حساب</p>
+                                }
+                            </td>
+                            <td>
+                                @{
+                                    string tagHref = "<a href='/UserPanel/MyOrders/ShowOrder/"+item.Description.Replace("فاکتور شما#","")+"'>#</a>";
+                                }
+                                @Html.Raw(item.Description.Replace("#",tagHref))
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<partial name="_Sidebar" />
+
+

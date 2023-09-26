@@ -1,0 +1,64 @@
+﻿@page
+@model Store.Pages.Admin.Courses.IndexModel
+@{
+    ViewData["Title"] = "لیست دوره ها";
+}
+
+<div class="main-content">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header" style="text-align: right"> لیست دوره ها</div>
+            <div class="card-body card-block">
+
+                
+                <div class="row col-md-12" dir="rtl">
+
+                    <a asp-page="CreateCourse" class="btn btn-outline-success">افزودن دوره جدید</a>
+
+                </div>
+                <br />
+
+                <div class="col-lg-12">
+                    <div class="table-responsive table--no-card m-b-30">
+                        <table class="table table-borderless table-striped table-earning">
+                            <thead>
+                                <tr>
+                                    <th>دستورات</th>
+                                    <th>تعداد جلسات</th>
+                                    <th>عنوان دوره</th>
+                                    <th>تصویر</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 @foreach (var item in Model.ListCourse)
+                                    {
+                                    <tr>
+                                    <td>
+                                    <a href="/Admin/Courses/EditCourse/@item.CourseId" class="btn btn-warning btn-sm">
+                                    ویرایش
+                                    </a>
+                                    <a href="/Admin/Courses/IndexEpisode/@item.CourseId" class="btn btn-danger btn-sm">
+                                    افزودن بخش
+                                    </a>
+                                    </td>
+                                    <td>@item.EpisodeCount</td>
+                                    <td>
+                                    @item.Title
+                                    </td>
+
+                                        <td>
+                                            <img src="/course/thumb/@item.ImageName" class="thumbnail"/>
+                                        </td>
+                                    </tr>
+                                    }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

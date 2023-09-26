@@ -1,0 +1,11 @@
+﻿@model DataLayer.Entities.User.User
+@{
+    ViewData["Title"] = "پابان ثبت نام";
+}
+<div style="margin-top: 100px; text-align: right">
+    <div class="alert alert-success">
+        <h2>@Model.UserName عزیز</h2>
+        <p>ثبت نام شما انجام شد.ایمیلی حاوی لینک فعال سازی به ایمیل"@Model.Email"ارسال شد</p>
+        <p>جها ادامه ثبت نام واردایمیل خود شوید و روی لینک کلیک کنید</p>
+    </div>
+</div>

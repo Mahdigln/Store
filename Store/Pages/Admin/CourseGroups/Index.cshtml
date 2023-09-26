@@ -1,0 +1,79 @@
+﻿@page
+@model Store.Pages.Admin.CourseGroups.IndexModel
+@{
+    ViewData["Title"] = "لیست گروه ها";
+}
+
+<div class="main-content">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header" style="text-align: right"> لیست گروه ها</div>
+            <div class="card-body card-block">
+
+                
+                <div class="row col-md-12" dir="rtl">
+
+                    <a asp-page="CreateGroup" class="btn btn-outline-success">افزودن گروه جدید</a>
+
+                </div>
+                <br />
+
+                <div class="col-lg-12">
+                    <div class="table-responsive table--no-card m-b-30" dir="rtl">
+                        <table class="table table-borderless table-striped table-earning">
+                            <thead  style="text-align: right">
+                            <tr style="text-align: right">
+                                <th>عنوان گروه</th>
+                                <th>زیر گروه ها</th>
+                                <th>دستورات</th>
+
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: right">
+
+                           
+                            @foreach (var group in Model.CourseGroups.Where(g=>g.ParentId==null))
+                            {
+                                <tr>
+                                    <td>@group.GroupTitle</td>
+                                    <td>
+                                      
+                                           @if (group.CourseGroups!=null)
+                                           {
+                                               <ul>
+                                                   @foreach (var sub  in group.CourseGroups)
+                                                   {
+                                                       <li>
+                                                           @sub.GroupTitle - <a href="/Admin/CourseGroups/EditGroup/@sub.GroupId" class="btn btn-outline-warning mt-1">
+                                                               ویرایش
+                                                           </a>
+                                                       </li>
+                                                   }
+                                               </ul>
+                                           }
+                                           
+                                    </td>
+                                    <td>
+                                        <a href="/Admin/CourseGroups/CreateGroup/@group.GroupId" class="btn btn-info btn-sm">
+                                            زیر گروه
+                                        </a>
+                                        <a href="/Admin/CourseGroups/EditGroup/@group.GroupId" class="btn btn-warning btn-sm">
+                                            ویرایش
+                                        </a>
+                                        @*<a href="/Admin/Roles/DeleteRole/@group.GroupId" class="btn btn-danger btn-sm">
+                                            حذف
+                                        </a>*@
+                                    </td>
+                                </tr>
+                            }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

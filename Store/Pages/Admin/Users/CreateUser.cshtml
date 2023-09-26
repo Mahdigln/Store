@@ -1,0 +1,114 @@
+﻿@page
+@using DataLayer.Entities.User
+@model Store.Pages.Admin.Users.CreateUserModel
+@{
+    ViewData["Title"] = "افزودن کاربر";
+    List<Role> Roles = ViewData["Roles"] as List<Role>;
+}
+
+
+<div class="main-content">
+    
+    <form method="post" enctype="multipart/form-data" dir="rtl" style="text-align: right">
+        <h2 style="padding: initial;padding-right: 50px;padding-bottom: 15px;">افزودن کاربر جدید</h2 >
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>اطلاعات کاربر</strong>
+                            </div>
+                            <div class="card-body card-block">
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>نام کاربری</strong></label>
+                                    <input type="text" placeholder="نام کاربری  وارد کنید" asp-for="CreateUserViewModel.UserName" class="form-control">
+                                </div>
+
+                               
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>ایمیل</strong></label>
+                                    <input type="email" placeholder="ایمیل  وارد کنید" asp-for="CreateUserViewModel.Email" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>کلمه عبور</strong></label>
+                                    <input type="text" placeholder="کلمه عبور  وارد کنید" asp-for="CreateUserViewModel.Password" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class=" form-control-label"><strong>انتخاب نقش کاربر</strong></label>
+                                    @foreach (var item in Roles)
+                                    {
+                                        <br/>
+                                        @item.RoleTitle
+                                        <label class="switch switch-3d switch-info mr-3">
+                                            <input type="checkbox" class="switch-input" name="SelectedRoles" value="@item.RoleId">
+                                            <span class="switch-label"></span>
+                                            <span class="switch-handle"></span>
+                                        </label>
+                                    }
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-lg btn-info btn-block">
+                                        <span>ذخیره اطلاعات</span>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>تصویر پروفایل</strong>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="panel-body">
+                                    <img id="imgAvatar" class="thumbnail" src="/UserAvatar/Defult.jpg" />
+
+                                    <div class="form-group">
+                                        <br/>
+                                        <label><strong>انتخاب تصویر</strong></label>
+                                        <input type="file" asp-for="CreateUserViewModel.UserAvatar">
+                                    </div>
+                                </div>
+                                
+
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@*preview image before upload jquery
+*@
+@section Scripts
+{
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#imgAvatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#CreateUserViewModel_UserAvatar").change(function() {
+            readURL(this);
+        });
+    </script>
+}

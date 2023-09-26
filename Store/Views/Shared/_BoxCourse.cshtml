@@ -1,0 +1,21 @@
+﻿@model Core.DTOs.Course.ShowCourseListItemViewModel
+
+
+
+        
+           
+<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+    <div class="glasses_box">
+        <figure>
+            <a href="/ShowCourse/@Model.CourseId" class="img-layer">
+                <img src="/course/thumb/@Model.ImageName" style="height:150px" alt="#">
+            </a>
+        </figure>
+        <h1 class="d-flex justify-content-center"><a href="/ShowCourse/@Model.CourseId"> @Model.Title </a></h1>
+        <span class="blu d-flex justify-content-center"> @((Model.Price==0)?"رایگان":Model.Price.ToString("#,0")) تومان </span>
+        <i class="d-flex justify-content-center">@Model.TotalTime</i>
+    </div>
+</div>
+
+
+            

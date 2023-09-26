@@ -1,0 +1,242 @@
+﻿@using Core.DTOs.Course
+@model IEnumerable<Core.DTOs.Course.ShowCourseListItemViewModel>
+
+@{
+    ViewData["Title"] = "خانه";
+}
+@section SearchBox
+{
+    <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+    
+        <div class="col-md-7">
+            <form action="/course/" method="get">
+                 <input type="text" name="filter" placeholder="دنبال چی میگردی.....">
+                <button><i class="fa fa-search"></i></button>
+               
+            </form>
+        </div>
+   
+
+}
+<main id="home-page">
+    <div class="container">
+        <section class="terms-items">
+           
+            @* <div class="row">*@
+            <div class="glasses">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-11 offset-md-1">
+                            <div class="titlepage">
+                                <h2  style="text-align: center">آخرین دوره ها</h2>
+                                @*<p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
+                                    e et dolore magna aliqua. Ut enim ad minim veniam, qui
+                                </p>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                <div class="row">
+                    @foreach (var item in @Model)
+                        {
+                            <partial name="_BoxCourse" model="@item" />
+                        }
+                    </div>
+                </div>
+            </div>
+            @*</div>*@
+            <section class="terms-items">
+                <header>
+                    <h2 style="text-align: center"> دوره های محبوب  </h2>
+                   @* <a href=""> مشاهده همه دوره ها </a>*@
+                </header>
+                <div class="glasses">
+                    <div class="row">
+                        @{
+                            List<ShowCourseListItemViewModel> populare = ViewBag.PopulareCourse as List<ShowCourseListItemViewModel>;
+                        }
+               
+                        <!-- /col -->
+                        @if (populare != null)
+                        {
+                            foreach (var item  in populare)
+                            {
+                                <partial name="_BoxCourse" model="@item"/>
+                            }
+                        }
+                    </div>
+                </div>
+            </section>
+
+        </section>
+    </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@section Banner{
+    <section class="banner_main">
+    <div id="banner1" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+    <li data-target="#banner1" data-slide-to="0" class="active"></li>
+    <li data-target="#banner1" data-slide-to="1"></li>
+    <li data-target="#banner1" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+    <div class="carousel-item active">
+    <div class="container">
+    <div class="carousel-caption">
+    <div class="text-bg">
+    <h1> <span class="blu">Welcome <br></span>To Our Sunglasses</h1>
+    <figure><img src="/images/banner_img.png" alt="#" /></figure>
+    <a class="read_more" href="#">Shop Now</a>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="carousel-item">
+    <div class="container">
+    <div class="carousel-caption">
+    <div class="text-bg">
+    <h1> <span class="blu">Welcome <br></span>To Our Sunglasses</h1>
+    <figure><img src="/images/banner_img.png" alt="#" /></figure>
+    <a class="read_more" href="#">Shop Now</a>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="carousel-item">
+    <div class="container">
+    <div class="carousel-caption">
+    <div class="text-bg">
+    <h1> <span class="blu">Welcome <br></span>To Our Sunglasses</h1>
+    <figure><img src="/images/banner_img.png" alt="#" /></figure>
+    <a class="read_more" href="#">Shop Now</a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </a>
+    <a class="carousel-control-next" href="#banner1" role="button" data-slide="next">
+    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+    </a>
+    </div>
+    </section>
+
+    }*@
+
+@*<div class="glasses" >
+    <div class="container">
+    <div class="row">
+    <div class="col-md-10 offset-md-1">
+    <div class="titlepage">
+    <h2>Our Glasses</h2>
+    <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
+    e et dolore magna aliqua. Ut enim ad minim veniam, qui
+    </p>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+    <div class="glasses_box">
+    <figure><img src="/images/glass1.png" alt="#" /></figure>
+    <h3><span class="blu">$</span>50</h3>
+    <p>Sunglasses</p>
+    </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+    <div class="glasses_box">
+    <figure><img src="/images/glass2.png" alt="#" /></figure>
+    <h3><span class="blu">$</span>50</h3>
+    <p>Sunglasses</p>
+    </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+    <div class="glasses_box">
+    <figure><img src="/images/glass3.png" alt="#" /></figure>
+    <h3><span class="blu">$</span>50</h3>
+    <p>Sunglasses</p>
+    </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+    <div class="glasses_box">
+    <figure><img src="/images/glass4.png" alt="#" /></figure>
+    <h3><span class="blu">$</span>50</h3>
+    <p>Sunglasses</p>
+    </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+    <div class="glasses_box">
+    <figure><img src="/images/glass5.png" alt="#" /></figure>
+    <h3><span class="blu">$</span>50</h3>
+    <p>Sunglasses</p>
+    </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+    <div class="glasses_box">
+    <figure><img src="/images/glass6.png" alt="#" /></figure>
+    <h3><span class="blu">$</span>50</h3>
+    <p>Sunglasses</p>
+    </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+    <div class="glasses_box">
+    <figure><img src="/images/glass7.png" alt="#" /></figure>
+    <h3><span class="blu">$</span>50</h3>
+    <p>Sunglasses</p>
+    </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+    <div class="glasses_box">
+    <figure><img src="/images/glass8.png" alt="#" /></figure>
+    <h3><span class="blu">$</span>50</h3>
+    <p>Sunglasses</p>
+    </div>
+    </div>
+    <div class="col-md-12">
+    <a class="read_more" href="#">Read More</a>
+    </div>
+    </div>
+    </div>
+    </div>*@
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+<partial name="_Contact" />

@@ -1,0 +1,30 @@
+﻿@using Core.Convertors
+@model Core.DTOs.InformationUserViewModel
+@{
+    ViewData["Title"] = User.Identity.Name + "پنل کاربری ";
+}
+
+<body>
+
+<div  style="padding: initial; padding-right: 500px; padding-left: 400px; padding-top: 110px; padding-bottom: 200px; text-align: right">
+    <div >
+        <div class="card-header">
+            <strong class="card-title">اطلاعات کاربری</strong>
+        </div>
+        <div >
+            <ul style="background-color: #e5e5e5">
+
+                <li> <i class="zmdi zmdi-assignment-account"></i> نام کاربری : @Model.UserName </li>
+                <li> <i class="zmdi zmdi-email"></i> ایمیل : @Model.Email </li>
+                <li> <i class="zmdi zmdi-calendar-check"></i> تاریخ عضویت : @Model.RegisterDate.ToShamsi() </li>
+                <li> <i class="zmdi zmdi-smartphone-android"></i> موجودی حساب : @Model.Wallet تومان </li>
+            </ul>
+        </div>
+      
+    </div>
+</div>
+
+<partial name="_Sidebar"/>
+
+</body>
+

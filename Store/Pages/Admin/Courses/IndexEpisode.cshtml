@@ -1,0 +1,82 @@
+﻿@page "{id}"
+@model Store.Pages.Admin.Courses.IndexEpisodeModel
+@{
+    ViewData["Title"] ="بخش های دوره";
+}
+
+
+<div class="main-content">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header" style="text-align: right">لیست قسمت ها</div>
+            <div class="card-body card-block">
+
+               
+                <div class="row col-md-12" dir="rtl">
+                        
+                    <a asp-page="CreateEpisode" asp-route-id="@ViewData["CourseId"].ToString()" class="btn btn-outline-success">افزودن بخش جدید</a>
+                        
+                </div>
+                <br/>
+
+                <div class="col-lg-12">
+                    <div class="table-responsive table--no-card m-b-30">
+                        <table class="table table-borderless table-striped table-earning" style="text-align: right">
+                            <thead>
+                            <tr>
+                                <th>دستورات</th>
+                                <th>رایگان</th>
+                                <th>زمان جلسات</th>
+                                <th>عنوان بخش</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            
+                            @foreach (var item in Model.CourseEpisodes)
+                            {
+                                <tr>
+                                
+                                    <td>
+                                        <a href="/Admin/Courses/EditEpisode/@item.EpisodeId" class="btn btn-warning btn-sm">
+                                            ویرایش
+                                        </a>
+                                        @*<a href="" class="btn btn-danger btn-sm">
+                                            حذف
+                                        </a>*@
+                                    </td>
+                                    
+                                    <td>
+                                        @if (@item.IsFree)
+                                        {
+                                            <label class="text-success">
+                                                هست
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <label class="text-danger">
+                                                نیست
+                                            </label>
+                                        }
+                                    </td>
+                                    
+                                    <td>
+                                        @item.EpisodeTime
+                                    </td>
+
+                                    <td>
+                                        @item.EpisodeTitle
+                                    </td>
+
+                                </tr>
+                            }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
