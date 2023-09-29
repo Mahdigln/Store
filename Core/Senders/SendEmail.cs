@@ -13,7 +13,7 @@ namespace Core.Senders
         {
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-            mail.From = new MailAddress("tt9407312@gmail.com", "Sungla");//اینجا باید ایمیلمون رو بنویسیم
+            mail.From = new MailAddress("", "Sungla");//اینجا باید ایمیلمون رو بنویسیم
             mail.To.Add(to);
             mail.Subject = subject;
             mail.Body = body;
@@ -25,7 +25,7 @@ namespace Core.Senders
 
             SmtpServer.Port = 587;
             // SmtpServer.UseDefaultCredentials = false;  //stack over flow
-            SmtpServer.Credentials = new System.Net.NetworkCredential("tt9407312@gmail.com", "yoeaykiaezhcvpfd");//اینجا باید ایمیل و پسوردش رو بنویسیم
+            SmtpServer.Credentials = new System.Net.NetworkCredential("", "");//اینجا باید ایمیل و پسوردش رو بنویسیم
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);
